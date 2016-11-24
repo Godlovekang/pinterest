@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>瀑布流布局</title>
+    <style>
+        .pinterest {
+            position: relative;
+            width: 1050px;
+            margin: 0 auto;
+        }
+
+        ul>li {
+            position: absolute;
+            list-style: none;
+            width: 200px;
+            margin: 5px;
+        }
+
+        .h1 {
+            height: 300px;
+            background-color: #4285f4;
+        }
+
+        .h2 {
+            height: 200px;
+            background-color: #0f9d58;
+        }
+
+        .h3 {
+            height: 400px;
+            background-color: #f4b400;
+        }
+
+        .h4 {
+            height: 350px;
+            background-color: #db4437;
+        }
+
+        .h5 {
+            height: 400px;
+            background-color: #f4b400;
+        }
+
+        .h6 {
+            height: 300px;
+            background-color: #4285f4;
+        }
+
+        .h7 {
+            height: 200px;
+            background-color: #0f9d58;
+        }
+
+        .h8 {
+            height: 300px;
+            background-color: #db4437;
+        }
+
+        .h9 {
+            height: 250px;
+            background-color: #4285f4;
+        }
+
+        .h10 {
+            height: 400px;
+            background-color: #f4b400;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pinterest">
+        <ul>
+            <li class="h1">1</li>
+            <li class="h2">2</li>
+            <li class="h3">3</li>
+            <li class="h4">4</li>
+            <li class="h5">5</li>
+            <li class="h6">6</li>
+            <li class="h7">7</li>
+            <li class="h8">8</li>
+            <li class="h9">9</li>
+            <li class="h10">10</li>
+            <li class="h3">11</li>
+            <li class="h4">12</li>
+            <li class="h5">13</li>
+            <li class="h6">14</li>
+            <li class="h7">15</li>
+            <li class="h8">16</li>
+            <li class="h6">17</li>
+            <li class="h7">18</li>
+            <li class="h8">19</li>
+            <li class="h9">20</li>
+            <li class="h10">21</li>
+            <li class="h3">22</li>
+            <li class="h4">23</li>
+            <li class="h1">1</li>
+            <li class="h2">2</li>
+            <li class="h3">3</li>
+            <li class="h4">4</li>
+            <li class="h5">5</li>
+            <li class="h6">6</li>
+            <li class="h7">7</li>
+            <li class="h8">8</li>
+            <li class="h9">9</li>
+            <li class="h10">10</li>
+            <li class="h3">11</li>
+            <li class="h4">12</li>
+            <li class="h5">13</li>
+            <li class="h6">14</li>
+            <li class="h7">15</li>
+            <li class="h8">16</li>
+            <li class="h6">17</li>
+            <li class="h7">18</li>
+            <li class="h8">19</li>
+            <li class="h9">20</li>
+            <li class="h10">21</li>
+            <li class="h3">22</li>
+            <li class="h4">23</li>
+        </ul>
+
+    </div>
+
+
+
+    <script src="jquery.js "></script>
+    <script>
+        var $ct = $('.pinterest');
+        var $box = $('.pinterest>ul>li');
+        var boxWidth = $box.outerWidth(true);
+        var colSumHeight = [],
+            colNum = parseInt($ct.width() / boxWidth);
+
+
+        for (var i = 0; i < colNum; i++) {
+            colSumHeight.push(0);
+        }
+        $box.each(function() {
+            var value = minValue(colSumHeight).minValue;
+            var index = minValue(colSumHeight).minIndex;
+            $(this).css({
+                'left': index * boxWidth,
+                'top': value
+            })
+            colSumHeight[index] = colSumHeight[index] + $(this).outerHeight(true);
+        })
+
+        function minValue(arr) {
+            if (arr.length === 0) return;
+            var value = arr[0],
+                index = 0;
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] < value) {
+                    value = arr[i];
+                    index = i;
+                }
+            }
+            return ({
+                "minValue": value,
+                "minIndex": index
+            })
+        }
+    </script>
+</body>
+
+</html>
